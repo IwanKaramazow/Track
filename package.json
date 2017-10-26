@@ -1,0 +1,24 @@
+{
+  "name": "track",
+  "version": "0.0.1",
+  "description": "Experiments with lexing in Ocaml",
+  "main": "index.js",
+  "scripts": {
+    "test": "esy make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IwanKaramazow/Track.git"
+  },
+  "keywords": [
+    "ocaml",
+    "reason",
+    "lexer"
+  ],
+  "author": "Iwan Karamazow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IwanKaramazow/Track/issues"
+  },
+  "homepage": "https://github.com/IwanKaramazow/Track#readme"
+}

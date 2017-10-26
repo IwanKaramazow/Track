@@ -1,0 +1,5 @@
+.merlin
+_build
+_esybuild
+_esyinstall
+node_modules

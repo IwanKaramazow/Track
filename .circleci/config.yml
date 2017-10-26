@@ -1,0 +1,11 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: circleci/node:7.10.0
+     steps:
+       - checkout
+       - run: sudo npm install -g esy
+       - run: sudo esy install
+       - run: sudo esy build
+       - run: sudo esy make test

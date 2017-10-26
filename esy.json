@@ -1,0 +1,29 @@
+{
+  "name": "track",
+  "version": "0.0.1",
+  "dependencies": {
+      "@opam/jbuilder": "*",
+      "@opam/merlin": "*",
+      "@opam/alcotest": "*"
+   },
+  "dependencies": {
+    "@opam/jbuilder": "*",
+    "@opam/alcotest": "*"
+  },
+  "resolutions": {
+     "**/@opam/ocamlbuild": "esy-ocaml/ocamlbuild#0.11.0-esy"
+   },
+  "peerDependencies": {
+    "ocaml": " >= 4.2.3 "
+  },
+  "devDependencies": {
+    "@opam/merlin": "*",
+    "ocaml": "~4.4.2000"
+  },
+  "esy": {
+    "build": [
+      ["jbuilder", "runtest"]
+    ],
+    "buildsInSource": true
+  }
+}

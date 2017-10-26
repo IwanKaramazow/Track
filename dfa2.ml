@@ -39,7 +39,7 @@ let transition node c =
   next_node
 
 let () = 
-  let parse s = 
+  let parse dfa s = 
     let input = s in
     let n = String.length input in
     let (start_node, _) = dfa in
@@ -57,11 +57,7 @@ let () =
   in
   let rec main () =
     let input = read_line () in
-    parse input;
+    parse dfa input;
     main ()
   in
   main ()
-
-
-
-

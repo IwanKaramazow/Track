@@ -1,0 +1,9 @@
+(jbuild_version 1)
+
+;; This declare the dfa2 executable implemented by dfa2.ml
+;; (executable
+ ;; ((name dfa2)))
+
+;; This declare the regex executable implemented by regex.ml
+;; (executable
+;;  ((name regex)))

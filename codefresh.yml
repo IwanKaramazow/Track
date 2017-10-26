@@ -1,0 +1,15 @@
+version: '1.0'
+steps:
+  build_step:
+    title: Build Docker Ubuntu Image
+    type: build
+    image_name: iwankaramazow/track
+    dockerfile: Dockerfile
+
+  unit_tests:
+    image: ${{build_step}}
+    working_directory: IMAGE_WORK_DIR
+    commands:
+      - esy install
+      - esy build
+      - esy jbuilder runtest
