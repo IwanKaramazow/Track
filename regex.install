@@ -1,0 +1,15 @@
+lib: [
+  "_build/install/default/lib/regex/META" {"META"}
+  "_build/install/default/lib/regex/opam" {"opam"}
+  "_build/install/default/lib/regex/regex.cmi"
+  "_build/install/default/lib/regex/regex.cmx"
+  "_build/install/default/lib/regex/regex.cmt"
+  "_build/install/default/lib/regex/regex.ml"
+  "_build/install/default/lib/regex/regex.cma"
+  "_build/install/default/lib/regex/regex.cmxa"
+  "_build/install/default/lib/regex/regex.a"
+  "_build/install/default/lib/regex/regex.cmxs"
+]
+doc: [
+  "_build/install/default/doc/regex/README.md"
+]

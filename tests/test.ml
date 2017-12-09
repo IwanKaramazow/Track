@@ -13,6 +13,11 @@ let node_checker = Alcotest.testable pp_node (=)
 
 let nfa_check = Alcotest.testable pp_nfa (=)
 
+let pp_matrix fmt matrix =
+  Fmt.pf fmt "%a" Fmt.(Dump.array (Dump.array (Dump.pair int int))) matrix
+
+let matrix_check = Alcotest.testable pp_matrix (=)
+
 let final = Regex.({ id = 1; transitions = []; epsilon = [] })
 
 let char_test () =
@@ -100,6 +105,14 @@ let plus_test () =
   Alcotest.(check nfa_check) "plus regex compilation" nfa nfa
   
 
+let transition_matrix_test () =
+  ()
+  (* let nfa = Regex.compile (Regex.concat (Regex.char_regex 'a') (Regex.char_regex 'b')) in *)
+  (* let expected = [|[|(97, 1)|]; [|(98, 2)|]; [||]|] in *)
+  (* Alcotest.(check matrix_check) "builds transition_matrix" *)
+    (* (Regex.construct_dfa_transition_matrix nfa) *)
+    (* expected *)
+
 let nfa_test_set = [
   "char regex" , `Quick, char_test;
   "epsilon regex", `Quick, epsilon_test;
@@ -110,8 +123,15 @@ let nfa_test_set = [
   (* "plus regex", `Quick, plus_test; *)
 ]
 
+let determization = [
+  "transition matrix", `Quick, transition_matrix_test
+]
+
 (* Run it *)
 let () =
   Alcotest.run "Regex" [
     "regex -> nfa", nfa_test_set;
+    "nfa -> dfa", determization;
   ]
+
+

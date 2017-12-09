@@ -83,6 +83,98 @@ let compile regex =
   let final_node = new_node () in
   (regex final_node, final_node)
 
+(* [0 - 255] *) 
+let alphabet_size = 256
+
+(* dog slow *)
+let find_index needle haystack =
+  let rec find i needle = function
+    | [] -> raise Not_found
+    | x::xs -> if x == needle then i else find (i + 1) needle xs 
+  in
+  find 0 needle haystack
+
+let rec add_node state node =
+  if List.memq node state then state else add_nodes (node::state) node.epsilon
+and add_nodes state nodes =
+  List.fold_left add_node state nodes
+
+(* TODO: epsilon closure *)
+let dfa_edge nfa = 
+  Array.of_list nfa.transitions
+  (* let ts = List.map (fun (charCode, node) -> (charCode, add_nodes [] node)) nfa.transitions in *)
+  (* Array.of_list ts *)
+
+let create_alphabet_arr () = Array.make 256 0
+
+let construct_dfa_transition_matrix nfa =
+  let (start, _final) = nfa in
+  let states = Hashtbl.create 20 in
+  let transitions = Hashtbl.create 20 in
+
+  let counter = ref 0 in
+
+  let rec aux nfa =
+    try Hashtbl.find states nfa
+    with Not_found ->
+      let i = !counter in
+      incr counter;
+      let e = dfa_edge nfa in
+      let e2 = Array.map (fun (charCode, node) -> charCode, aux node) e in
+      Hashtbl.add transitions i e2;
+      i
+  in
+  let count_ = aux start in
+  (* assert (count = 0); *)
+  Array.init !counter (Hashtbl.find transitions)
+  |> Array.map (fun item ->
+    let alphabet_arr = create_alphabet_arr () in
+    Array.iter (fun (charCode, nextState) -> 
+      Array.set alphabet_arr charCode nextState;
+      ) item;
+    alphabet_arr)
+
+
+type dfa_state = node list
+
+let match_ word transition_matrix =
+  let len = String.length word in
+  let rec aux i state =
+    if i == len then
+      begin match state with
+      | 0 -> true
+      | _ -> false
+      end
+    else
+      begin
+    let arr = transition_matrix.(state) in
+    let charCode = Char.code (String.get word i) in
+    print_endline (string_of_int i);
+    print_endline (string_of_int charCode);
+    begin match arr.(charCode) with
+    | 0 -> if i == (len - 1) then true else false
+    | nextState -> aux (i + 1) nextState
+    end
+      end
+  in
+  aux 0 0
+
+
+
+(* let rec add_node state node = *)
+  (* if List.memq node state then state else add_nodes (node::state) node.epsilon *)
+(* and add_nodes state nodes = *)
+  (* List.fold_left add_node state nodes *)
+
+(* let () = *)
+  (* let rsa = compile (char_regex 'a') in *)
+  (* let rsb = compile (char_regex 'b') in *)
+  (* let rsc = compile (char_regex 'a') in *)
+  (* let init = ref [] in  *)
+  (* Array.iter (fun (i,_) -> init :=  add_node !init i) [| rsa; rsb; rsa |]; *)
+  (* let _ = 1 in *)
+  (* () *)
+
 (* let () = *)
   (* let regex = char_regex 'a' in *)
   (* let regex2 = char_regex 'b' in *)

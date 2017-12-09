@@ -2,7 +2,7 @@ FROM ubuntu:17.10
 MAINTAINER Iwan Karamazow
 
 RUN apt-get update
-RUN apt-get install -y git wget
+RUN apt-get install -y git wget bzip2 xz-utils build-essential m4
 
 ENV NODE_VERSION 8.9.0
 
@@ -16,6 +16,6 @@ COPY . /out
 
 WORKDIR /out
 
-RUN npm install -g esy
+RUN npm install -g esy@next
 
 CMD ["/bin/bash"]

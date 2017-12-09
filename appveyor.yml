@@ -12,12 +12,12 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version
   - node -v
-  - npm install -g esy
+  - npm install -g esy@next
   - esy install
+  - esy build
 
 test_script:
-  - esy make build
-  - esy make test
+  - esy build
 
 # don't build? what does this do?
 build: off

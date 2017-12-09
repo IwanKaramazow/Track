@@ -1,5 +1,5 @@
-# build:
-	# jbuilder build regex.exe
+build:
+	jbuilder runtest
 
 test:
 	jbuilder runtest
